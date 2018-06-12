@@ -14,7 +14,6 @@ C:\GitRepositories\CityInfoApi\CityInfoApi\bin\Debug\netcoreapp2.0\CityInfoApi.r
 C:\GitRepositories\CityInfoApi\CityInfoApi\bin\Debug\netcoreapp2.0\CityInfoApi.runtimeconfig.dev.json
 C:\GitRepositories\CityInfoApi\CityInfoApi\bin\Debug\netcoreapp2.0\CityInfoApi.dll
 C:\GitRepositories\CityInfoApi\CityInfoApi\bin\Debug\netcoreapp2.0\CityInfoApi.pdb
-C:\GitRepositories\CityInfoApi\CityInfoApi\obj\Debug\netcoreapp2.0\CityInfoApi.csprojResolveAssemblyReference.cache
 C:\GitRepositories\CityInfoApi\CityInfoApi\obj\Debug\netcoreapp2.0\CityInfoApi.csproj.CoreCompileInputs.cache
 C:\GitRepositories\CityInfoApi\CityInfoApi\obj\Debug\netcoreapp2.0\CityInfoApi.AssemblyInfoInputs.cache
 C:\GitRepositories\CityInfoApi\CityInfoApi\obj\Debug\netcoreapp2.0\CityInfoApi.AssemblyInfo.cs
