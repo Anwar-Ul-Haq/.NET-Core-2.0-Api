@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CityInfoApi.Entities;
 using CityInfoApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,8 +31,7 @@ namespace CityInfoApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddMvcOptions(o=>o.OutputFormatters.Add(
-                new XmlDataContractSerializerOutputFormatter()
-                ));
+                new XmlDataContractSerializerOutputFormatter()));
 
             //if you  want to overwrite default json properties name 
             //    .AddJsonOptions(o =>
@@ -50,10 +51,13 @@ namespace CityInfoApi
 
             services.AddTransient<IMailService, CloudMailService>();
 #endif
+            var connectionString = Startup.Configuration["connectionStrings:cityInfoDBConnectionString"];
+
+            services.AddDbContext<CityInfoContext>(c=>c.UseSqlServer(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env , ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env , ILoggerFactory loggerFactory , CityInfoContext cityInfoContext)
         {
            // loggerFactory.AddProvider(new NLog.Extensions.Logging.NLogLoggerProvider());
 
@@ -68,6 +72,8 @@ namespace CityInfoApi
             {
                 app.UseExceptionHandler();
             }
+
+            cityInfoContext.EnsureSeedDataForContext();
             app.UseStatusCodePages();
 
             app.UseMvc();
