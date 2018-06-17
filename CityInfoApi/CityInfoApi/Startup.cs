@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CityInfoApi.Entities;
+using CityInfoApi.Models;
 using CityInfoApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -51,6 +52,7 @@ namespace CityInfoApi
 
             services.AddTransient<IMailService, CloudMailService>();
 #endif
+            services.AddScoped<ICityInfoRepository, CityInfoRepository>();
             var connectionString = Startup.Configuration["connectionStrings:cityInfoDBConnectionString"];
 
             services.AddDbContext<CityInfoContext>(c=>c.UseSqlServer(connectionString));
@@ -75,6 +77,16 @@ namespace CityInfoApi
 
             cityInfoContext.EnsureSeedDataForContext();
             app.UseStatusCodePages();
+
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<City, CityWithOutPointsOfInterestDto>();
+                cfg.CreateMap<City, CityDto>();
+                cfg.CreateMap<PointOfInterest, PointOfInterestDto>();
+                cfg.CreateMap<PointOfInterestForCreationDto, PointOfInterest>();
+
+
+            });
 
             app.UseMvc();
             
