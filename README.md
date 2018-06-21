@@ -4,4 +4,5 @@ Also added migration,logging, automapper etc. Feel free to use as a boilerplate 
 
 
 Anwar ul Haq 
+
 https://www.linkedin.com/in/anwar-ul-haq-b6604318/
